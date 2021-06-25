@@ -1,0 +1,13 @@
+{
+  "name": "ueno",
+  "name#ja": "上野",
+  "name#zh": "上野",
+  "author": "Typlog",
+  "repo": "typlog/ueno",
+  "features": {
+    "post": true,
+    "audio": true,
+    "review": true
+  },
+  "images": []
+}
