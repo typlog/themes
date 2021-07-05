@@ -1,8 +1,10 @@
+import re
 import sys
 import json
 from urllib.request import Request, urlopen
 
 
+LINK_ANCHOR = re.compile(r'<a[^>]+><svg class="octicon octicon-link".+?</svg></a>')
 url_base = 'https://api.github.com/repos/'
 
 
@@ -22,7 +24,8 @@ def fetch_readme(repo):
     # req.add_header('Authorization', 'Bearer')
     with urlopen(req) as f:
         content = f.read()
-    return content.decode('utf-8')
+    content = content.decode('utf-8')
+    return LINK_ANCHOR.sub('</a>', content)
 
 
 def update_theme(name):
