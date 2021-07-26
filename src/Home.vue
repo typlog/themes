@@ -108,6 +108,7 @@ export default {
 .home_main input {
   appearance: none;
   width: 100%;
+  max-width: 480px;
   box-sizing: border-box;
   border: 1px solid #dadada;
   border-radius: 40px;
@@ -117,6 +118,7 @@ export default {
 }
 .theme-list {
   display: flex;
+  flex-wrap: wrap;
   margin-top: 1em;
   margin-left: -8px;
   margin-right: -8px;
@@ -139,5 +141,25 @@ export default {
 }
 .theme_name {
   text-transform: capitalize;
+}
+
+@media (max-width: 900px) {
+  .home {
+    flex-direction: column;
+  }
+  .home_nav {
+    width: 100%;
+    margin: 0 0 1em 0;
+  }
+  .home_nav > strong {
+    display: none;
+  }
+  .home_nav li {
+    display: inline-block;
+    margin-right: 1em;
+  }
+  .home_nav a {
+    padding: 0;
+  }
 }
 </style>
