@@ -17,7 +17,7 @@
       <div class="theme" v-for="theme in themes" :key="theme.name">
         <router-link class="browser" :title="theme.name" :to="theme.name">
           <div class="browser_toolbar"><span></span></div>
-          <div class="browser_content" :style="thumbnail(theme)"></div>
+          <div class="browser_content" :data-src="thumbnail(theme)"></div>
         </router-link>
         <div class="theme_info">
           <div class="theme_name">
@@ -48,10 +48,9 @@ export default {
     thumbnail (theme) {
       if (theme.images && theme.images.length) {
         const url = theme.images[0]
-        const src = `https://cdn.jsdelivr.net/gh/${theme.repo}/${url}`
-        return {'background-image': `url(${src})`}
+        return `https://cdn.jsdelivr.net/gh/${theme.repo}/${url}`
       } else {
-        return {}
+        return ''
       }
     },
     onSearch () {
@@ -64,6 +63,20 @@ export default {
     onUse (theme) {
       bridge.emit('select', theme)
     },
+    loadImage (el) {
+      const src = el.getAttribute('data-src')
+      if (src) {
+        el.setAttribute('style', 'background-image: url(' + src + ')')
+      }
+    }
+  },
+  mounted () {
+    const els = document.querySelectorAll('.browser_content')
+    for (let i = 0; i < els.length; i++) {
+      setTimeout(() => {
+        this.loadImage(els[i])
+      }, 100)
+    }
   },
 }
 </script>
