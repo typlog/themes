@@ -17,9 +17,7 @@
       <div class="theme" v-for="theme in themes" :key="theme.name">
         <router-link class="browser" :title="theme.name" :to="theme.name">
           <div class="browser_toolbar"><span></span></div>
-          <div class="browser_content">
-            <img v-if="theme.images && theme.images.length" :src="thumbnail(theme)" :alt="theme.name" />
-          </div>
+          <div class="browser_content" :style="thumbnail(theme)"></div>
         </router-link>
         <div class="theme_info">
           <div class="theme_name">
@@ -48,8 +46,13 @@ export default {
   },
   methods: {
     thumbnail (theme) {
-      const src = theme.images[0]
-      return `https://cdn.jsdelivr.net/gh/${theme.repo}/${src}`
+      if (theme.images && theme.images.length) {
+        const url = theme.images[0]
+        const src = `https://cdn.jsdelivr.net/gh/${theme.repo}/${url}`
+        return {'background-image': `url(${src})`}
+      } else {
+        return {}
+      }
     },
     onSearch () {
       this.$router.push({ query: { q: this.q }})
@@ -109,7 +112,7 @@ export default {
   border: 1px solid #dadada;
   border-radius: 40px;
   font: normal normal 14px/1.42 var(--sans-font), sans-serif;
-  padding: 4px 10px;
+  padding: 4px 18px;
   outline: none;
 }
 .theme-list {
@@ -121,12 +124,13 @@ export default {
 .theme {
   margin: 8px;
 }
-.theme .browser_content,
-.theme img {
+.theme .browser_content {
   width: 200px;
   height: 125px;
-  object-fit: cover;
   border-radius: 3px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .theme_info {
   display: flex;

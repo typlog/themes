@@ -18,6 +18,10 @@ body {
   padding: 1em;
 }
 
+.embed {
+  padding-top: 2em;
+}
+
 a {
   color: var(--link-color);
   text-decoration: none;
