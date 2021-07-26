@@ -24,7 +24,7 @@ def run():
     with open('index.json', 'w') as f:
         json.dump(data, f)
 
-    with open('mapping.json', 'w') as f:
+    with open('names.json', 'w') as f:
         json.dump(mapping, f)
 
 

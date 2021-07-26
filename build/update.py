@@ -25,7 +25,7 @@ def fetch_readme(repo):
     with urlopen(req) as f:
         content = f.read()
     content = content.decode('utf-8')
-    return LINK_ANCHOR.sub('</a>', content)
+    return LINK_ANCHOR.sub('', content)
 
 
 def update_theme(name):

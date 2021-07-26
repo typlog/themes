@@ -1,3 +1,12 @@
+.PHONY: build update clean
+
+update:
+	@python3 build/update.py registry/*.json
+	@python3 build/generate.py
+
 build:
-	@python3 update.py registry/*.json
-	@python3 build.py
+	@npm run build
+	@cp -r data dist
+
+clean:
+	@rm -fr dist
