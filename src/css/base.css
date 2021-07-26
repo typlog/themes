@@ -1,0 +1,68 @@
+:root {
+  --text-color: #24292e;
+  --subtext-color: #6e6d7a;
+  --highlight-rgb: 72, 159, 247;
+  --highlight-color: rgb(var(--highlight-rgb));
+  --link-color: var(--highlight-color);
+  --sans-font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font: normal normal 14px/1.42 var(--sans-font), sans-serif;
+  color: var(--text-color);
+}
+
+.inner {
+  padding: 1em;
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.browser {
+  display: block;
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+}
+.browser:hover {
+  transform: translate3d(0, -6px, 0);
+  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.1);
+}
+.browser_toolbar {
+  position: relative;
+  background-color: #f2f2f2;
+  border-radius: 6px 6px 0 0;
+  padding: 10px 12px;
+}
+.browser_toolbar span,
+.browser_toolbar span:before,
+.browser_toolbar span::after {
+  display: block;
+  content: '';
+  background-color: #c4c4c4;
+  border-radius: 50%;
+  height: 6px;
+  width: 6px;
+}
+.browser_toolbar span {
+  position: relative;
+}
+.browser_toolbar span:before {
+  position: absolute;
+  left: 10px;
+}
+.browser_toolbar span::after {
+  position: absolute;
+  left: 20px;
+}

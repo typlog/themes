@@ -1,10 +1,10 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import ThemeList from './components/ThemeList.vue'
-import ThemeDetail from './components/ThemeDetail.vue'
+import Home from './Home.vue'
+import Detail from './Detail.vue'
 
 const routes = [
-  { path: '', component: ThemeList, name: 'Home' },
-  { path: '/:slug', component: ThemeDetail, name: 'Detail' },
+  { path: '', component: Home, name: 'Home' },
+  { path: '/:slug', component: Detail, name: 'Detail' },
 ]
 
 export default createRouter({
