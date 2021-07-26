@@ -1,0 +1,11 @@
+{
+  "name": "meguro",
+  "name#zh": "目黑",
+  "name#ja": "目黒",
+  "repo": "typlog/meguro",
+  "author": "Typlog",
+  "features": {
+    "post": true,
+    "audio": false
+  }
+}
