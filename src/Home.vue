@@ -3,30 +3,27 @@
   <nav class="home_nav">
     <strong>Categories</strong>
     <ul>
-      <li><router-link to="/">All</router-link></li>
-      <li><router-link :to="{ query: { tag: 'blog' } }">Blog</router-link></li>
-      <li><router-link :to="{ query: { tag: 'podcast' } }">Podcast</router-link></li>
-      <li><router-link :to="{ query: { tag: 'doc' } }">Documentation</router-link></li>
+      <li><router-link :class="{active: hasTag()}" to="/">All</router-link></li>
+      <li><router-link :class="{active: hasTag('blog')}" :to="{ query: { tag: 'blog' } }">Blog</router-link></li>
+      <li><router-link :class="{active: hasTag('podcast')}" :to="{ query: { tag: 'podcast' } }">Podcast</router-link></li>
+      <li><router-link :class="{active: hasTag('doc')}" :to="{ query: { tag: 'doc' } }">Documentation</router-link></li>
     </ul>
   </nav>
   <main class="home_main">
-    <form @submit.prevent="onSearch">
-      <input type="search" v-model="q" placeholder="theme name ...">
-    </form>
     <div class="theme-list">
       <div class="theme" v-for="theme in themes" :key="theme.name">
         <router-link class="browser" :title="theme.name" :to="theme.name">
           <div class="browser_toolbar"><span></span></div>
           <div class="browser_content" :data-src="thumbnail(theme)"></div>
+          <span class="theme_star" v-if="theme.stars">★ {{ theme.stars }}</span>
         </router-link>
         <div class="theme_info">
           <div class="theme_name">
             <strong v-text="theme.name"></strong>
-            <span class="sep">/</span>
-            <span v-text="theme['name#ja']"></span>
+            <div v-text="theme['name#ja']"></div>
           </div>
           <div class="theme_action">
-            <button @click.prevent="onUse(theme)">Use</button>
+            <button class="button" @click.prevent="onUse(theme)">Use</button>
           </div>
         </div>
       </div>
@@ -44,6 +41,14 @@ export default {
     const q = this.$route.query.q || ''
     return { themes, q }
   },
+  watch: {
+    "$route.query.tag": {
+      immediate: true,
+      handler (tag) {
+        this.filterThemes(tag)
+      },
+    }
+  },
   methods: {
     thumbnail (theme) {
       if (theme.images && theme.images.length) {
@@ -53,12 +58,8 @@ export default {
         return ''
       }
     },
-    onSearch () {
-      this.$router.push({ query: { q: this.q }})
-      this.themes = themes.filter(theme => {
-        const text = [theme.name, theme.repo].join(' ')
-        return text.indexOf(this.q) !== -1
-      })
+    hasTag (tag) {
+      return this.$route.query.tag === tag
     },
     onUse (theme) {
       bridge.emit('select', theme)
@@ -67,6 +68,24 @@ export default {
       const src = el.getAttribute('data-src')
       if (src) {
         el.setAttribute('style', 'background-image: url(' + src + ')')
+      }
+    },
+    filterThemes (tag) {
+      if (!tag) {
+        this.themes = themes
+      } else {
+        this.themes = themes.filter(theme => {
+          const tags = theme.tags || []
+          if (theme.features) {
+            if (theme.features.post) {
+              tags.push('blog')
+            }
+            if (theme.features.audio) {
+              tags.push('podcast')
+            }
+          }
+          return tags.indexOf(tag) !== -1
+        })
       }
     }
   },
@@ -106,10 +125,14 @@ export default {
 }
 .home_nav a {
   display: block;
+  font-weight: 500;
   padding: 6px 16px;
   color: var(--text-color);
   text-decoration: none;
   border-radius: 3px;
+}
+.home_nav a.active {
+  background-color: rgba(var(--highlight-rgb), 0.2);
 }
 .home_nav a:hover {
   text-decoration: none;
@@ -118,34 +141,16 @@ export default {
 .home_main {
   flex-grow: 1;
 }
-.home_main input {
-  appearance: none;
-  width: 100%;
-  max-width: 480px;
-  box-sizing: border-box;
-  border: 1px solid #dadada;
-  border-radius: 40px;
-  font: normal normal 14px/1.42 var(--sans-font), sans-serif;
-  padding: 4px 18px;
-  outline: none;
-}
 .theme-list {
   display: flex;
   flex-wrap: wrap;
   margin-top: 1em;
-  margin-left: -8px;
-  margin-right: -8px;
+  margin-left: -10px;
+  margin-right: -10px;
 }
 .theme {
-  margin: 8px;
-}
-.theme .browser_content {
-  width: 200px;
-  height: 125px;
-  border-radius: 3px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  margin: 10px;
+  width: 280px;
 }
 .theme_info {
   display: flex;
@@ -153,7 +158,17 @@ export default {
   justify-content: space-between;
 }
 .theme_name {
-  text-transform: capitalize;
+  text-transform: uppercase;
+}
+.theme_star {
+  position: absolute;
+  display: block;
+  right: 10px;
+  bottom: 10px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.68);
+  padding: 2px 10px;
+  border-radius: 20px;
 }
 
 @media (max-width: 900px) {
@@ -173,6 +188,23 @@ export default {
   }
   .home_nav a {
     padding: 0;
+    border-radius: 0;
+    border-bottom: 3px solid transparent;
+  }
+  .home_nav a.active {
+    background-color: transparent;
+    border-color: rgba(var(--highlight-rgb), 0.8);
+  }
+  .home_nav a:hover {
+    color: rgba(var(--highlight-rgb), 0.8);
+    background-color: transparent;
+    border-color: rgba(var(--highlight-rgb), 0.6);
+  }
+}
+@media (max-width: 560px) {
+  .theme {
+    width: 100%;
+    margin-bottom: 2em;
   }
 }
 </style>

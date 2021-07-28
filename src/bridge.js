@@ -23,13 +23,15 @@ function receiveMessage (e) {
     port.onmessage = receiveMessage
   }
 
-  const message = JSON.parse(e.data)
-  const event = message.event
-  delete message.event
-  const fns = triggers[event]
-  if (fns) {
-    fns.forEach(fn => fn(message))
-  }
+  try {
+    const message = JSON.parse(e.data)
+    const event = message.event
+    delete message.event
+    const fns = triggers[event]
+    if (fns) {
+      fns.forEach(fn => fn(message))
+    }
+  } catch (e) {}
 }
 
 window.addEventListener('message', receiveMessage)
