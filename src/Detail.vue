@@ -23,9 +23,13 @@
             <th>Author</th>
             <td v-text="theme.author"></td>
           </tr>
-          <tr>
+          <tr v-if="theme.repo">
             <th>GitHub</th>
             <td><a :href="'https://github.com/' + theme.repo" target="_blank" v-text="theme.repo"></a></td>
+          </tr>
+          <tr v-if="theme.stars">
+            <th>Stars</th>
+            <td v-text="theme.stars"></td>
           </tr>
         </tbody>
       </table>
