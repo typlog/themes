@@ -14,12 +14,12 @@ body {
   color: var(--text-color);
 }
 
-.inner {
-  padding: 1em;
+#app {
+  padding-top: 2em;
 }
 
-.embed {
-  padding-top: 2em;
+.inner {
+  padding: 1em;
 }
 
 a {

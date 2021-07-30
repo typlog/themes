@@ -9,7 +9,10 @@
     <div class="detail_images">
       <div class="browser">
         <div class="browser_toolbar"><span></span></div>
-        <div class="browser_content"></div>
+        <div class="detail_gallery">
+          <div class="browser_content" v-for="src in theme.images" v-cover="urlize(src)" :key="src"></div>
+          <div class="browser_content" v-if="!theme.images || !theme.images.length"></div>
+        </div>
       </div>
     </div>
     <div class="detail_info">
@@ -46,6 +49,7 @@
 <script>
 import themes from '../index.json'
 import bridge from './bridge'
+import { genImageURL } from './util'
 
 export default {
   data () {
@@ -69,6 +73,9 @@ export default {
     onUse () {
       bridge.emit('select', this.theme)
     },
+    urlize (src) {
+      return genImageURL(src, this.theme.repo)
+    }
   },
   async created () {
     const name = this.$route.params.slug
@@ -87,6 +94,15 @@ export default {
 .detail_head {
   display: flex;
   margin-top: 2em;
+}
+.detail_gallery {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+.detail_gallery .browser_content {
+  width: 100%;
+  flex-shrink: 0;
 }
 .detail_info {
   margin-left: 4em;
@@ -122,20 +138,24 @@ export default {
     max-width: 100%;
   }
   .detail_info {
-    display: flex;
-    justify-content: space-between;
     margin: 2em 0 0 0;
   }
-  .detail_action {
+  .detail_info table {
+    width: 100%;
+  }
+  .detail_info tbody {
     display: flex;
-    flex-direction: column;
-    margin: 0;
   }
-  .detail_action .button {
-    width: 100px;
+  .detail_info th,
+  .detail_info td {
+    display: block;
+    text-align: center;
   }
-  .detail_action .button + .button {
-    margin: 1em 0 0 0;
+  .detail_info td {
+    border-bottom: 0;
+  }
+  .detail_action {
+    text-align: left;
   }
 }
 </style>

@@ -14,7 +14,7 @@
       <div class="theme" v-for="theme in themes" :key="theme.name">
         <router-link class="browser" :title="theme.name" :to="theme.name">
           <div class="browser_toolbar"><span></span></div>
-          <div class="browser_content" :data-src="thumbnail(theme)"></div>
+          <div class="browser_content" v-cover="thumbnail(theme)"></div>
           <span class="theme_star" v-if="theme.stars">★ {{ theme.stars }}</span>
         </router-link>
         <div class="theme_info">
@@ -23,7 +23,7 @@
             <div v-text="theme['name#ja']"></div>
           </div>
           <div class="theme_action">
-            <button class="button" @click.prevent="onUse(theme)">Use</button>
+            <button class="button js-use" @click.prevent="onUse(theme)">Use</button>
           </div>
         </div>
       </div>
@@ -35,6 +35,7 @@
 <script>
 import themes from '../index.json'
 import bridge from './bridge'
+import { genImageURL } from './util'
 
 export default {
   data () {
@@ -53,7 +54,7 @@ export default {
     thumbnail (theme) {
       if (theme.images && theme.images.length) {
         const url = theme.images[0]
-        return `https://cdn.jsdelivr.net/gh/${theme.repo}/${url}`
+        return genImageURL(url, theme.repo)
       } else {
         return ''
       }
@@ -63,12 +64,6 @@ export default {
     },
     onUse (theme) {
       bridge.emit('select', theme)
-    },
-    loadImage (el) {
-      const src = el.getAttribute('data-src')
-      if (src) {
-        el.setAttribute('style', 'background-image: url(' + src + ')')
-      }
     },
     filterThemes (tag) {
       if (!tag) {
@@ -87,14 +82,6 @@ export default {
           return tags.indexOf(tag) !== -1
         })
       }
-    }
-  },
-  mounted () {
-    const els = document.querySelectorAll('.browser_content')
-    for (let i = 0; i < els.length; i++) {
-      setTimeout(() => {
-        this.loadImage(els[i])
-      }, 100)
     }
   },
 }
