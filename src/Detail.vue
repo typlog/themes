@@ -143,8 +143,11 @@ export default {
   .detail_info table {
     width: 100%;
   }
+}
+@media (max-width: 860px) and (min-width: 680px) {
   .detail_info tbody {
     display: flex;
+    justify-content: center;
   }
   .detail_info th,
   .detail_info td {
@@ -153,9 +156,6 @@ export default {
   }
   .detail_info td {
     border-bottom: 0;
-  }
-  .detail_action {
-    text-align: left;
   }
 }
 </style>

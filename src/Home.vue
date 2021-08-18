@@ -22,9 +22,7 @@
             <strong v-text="theme.name"></strong>
             <div v-text="theme['name#ja']"></div>
           </div>
-          <div class="theme_action">
-            <button class="button js-use" @click.prevent="onUse(theme)">Use</button>
-          </div>
+          <div class="theme_price">Free</div>
         </div>
       </div>
     </div>
@@ -156,6 +154,9 @@ export default {
   background-color: rgba(0, 0, 0, 0.68);
   padding: 2px 10px;
   border-radius: 20px;
+}
+.theme_price {
+  color: rgba(0, 0, 0, 0.48);
 }
 
 @media (max-width: 900px) {
