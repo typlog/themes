@@ -1,0 +1,15 @@
+{
+  "name": "ginza",
+  "name#ja": "銀座",
+  "name#zh": "银座",
+  "author": "Typlog",
+  "repo": "typlog/ginza",
+  "features": {
+    "post": true,
+    "audio": true,
+    "review": true
+  },
+  "images": [
+      "images/1.png"
+  ]
+}
