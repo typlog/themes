@@ -37,7 +37,7 @@
         </tbody>
       </table>
       <div class="detail_action">
-        <a class="button" :href="'https://theme-' + theme.name + '.typlog.com/'" target="_blank">Preview</a>
+        <a class="button" :href="'https://preview.typlog.com/' + theme.name + '/'" target="_blank">Preview</a>
         <button class="js-use button" @click.prevent="onUse">Use</button>
       </div>
     </div>
