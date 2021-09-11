@@ -19,7 +19,12 @@ def run():
             with open(filepath) as f:
                 theme = json.load(f)
                 data.append(normalize(theme))
-                mapping[name[:-5]] = theme['repo']
+
+                repo = theme['repo']
+                version = theme.get('version')
+                if version:
+                    repo = f'{repo}@{version}'
+                mapping[name[:-5]] = repo
 
     with open('index.json', 'w') as f:
         json.dump(data, f)

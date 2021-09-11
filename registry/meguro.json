@@ -3,6 +3,7 @@
   "name#zh": "目黑",
   "name#ja": "目黒",
   "repo": "typlog/meguro",
+  "version": "0.1.0",
   "author": "Typlog",
   "features": {
     "post": true,
