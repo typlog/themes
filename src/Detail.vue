@@ -30,6 +30,10 @@
             <th>GitHub</th>
             <td><a :href="'https://github.com/' + theme.repo" target="_blank" v-text="theme.repo"></a></td>
           </tr>
+          <tr v-if="theme.version">
+            <th>Version</th>
+            <td v-text="theme.version"></td>
+          </tr>
           <tr v-if="theme.stars">
             <th>Stars</th>
             <td v-text="theme.stars"></td>
@@ -86,8 +90,12 @@ export default {
 }
 </script>
 
-
+<style src="./css/yue.css"></style>
 <style>
+.detail {
+  max-width: 860px;
+  margin: 0 auto;
+}
 .detail_name {
   text-transform: uppercase;
 }
@@ -128,7 +136,12 @@ export default {
   margin-left: 1em;
 }
 .detail_readme {
-  margin-top: 3.2em;
+  margin-top: 4.2em;
+  font-size: 16px;
+}
+.detail_readme h1 {
+  padding-bottom: 0.6em;
+  border-bottom: 1px solid #dadada;
 }
 @media (max-width: 860px) {
   .detail_head {
