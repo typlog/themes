@@ -4,12 +4,13 @@
   "name#zh": "银座",
   "author": "Typlog",
   "repo": "typlog/ginza",
+  "version": "0.1.0",
   "features": {
     "post": true,
     "audio": true,
     "review": true
   },
   "images": [
-      "images/1.png"
+      "https://user-images.githubusercontent.com/290496/133878214-faf64fa7-02b3-49df-ab79-601366a19422.png"
   ]
 }
