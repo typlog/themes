@@ -14,12 +14,9 @@ body {
   color: var(--text-color);
 }
 
-#app {
-  padding-top: 2em;
-}
-
 .inner {
   padding: 1em;
+  box-sizing: border-box;
 }
 
 a {

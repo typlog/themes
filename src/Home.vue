@@ -1,6 +1,6 @@
 <template>
-<div class="home inner">
-  <nav class="home_nav">
+<div class="home">
+  <nav class="home_nav inner">
     <strong>Categories</strong>
     <ul>
       <li><router-link :class="{active: hasTag()}" to="/">All</router-link></li>
@@ -9,7 +9,7 @@
       <li><router-link :class="{active: hasTag('doc')}" :to="{ query: { tag: 'doc' } }">Documentation</router-link></li>
     </ul>
   </nav>
-  <main class="home_main">
+  <main class="home_main inner">
     <div class="theme-list">
       <div class="theme" v-for="theme in themes" :key="theme.name">
         <router-link class="browser" :title="theme.name" :to="theme.name">
@@ -164,8 +164,13 @@ export default {
     flex-direction: column;
   }
   .home_nav {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     margin: 0 0 1em 0;
+    background: white;
+    z-index: 9;
   }
   .home_nav > strong {
     display: none;
@@ -187,6 +192,9 @@ export default {
     color: rgba(var(--highlight-rgb), 0.8);
     background-color: transparent;
     border-color: rgba(var(--highlight-rgb), 0.6);
+  }
+  .home_main {
+    margin-top: 40px;
   }
 }
 @media (max-width: 560px) {
