@@ -4,7 +4,7 @@
   "name#zh": "银座",
   "author": "Typlog",
   "repo": "typlog/ginza",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "features": {
     "post": true,
     "audio": true,
