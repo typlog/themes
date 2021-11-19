@@ -131,6 +131,7 @@ export default {
   width: 100%;
   flex-shrink: 0;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 .browser_image img {
   width: 100%;
@@ -161,5 +162,13 @@ export default {
 }
 .browser_next {
   right: 20px;
+}
+
+.browser ::-webkit-scrollbar {
+  display: none;
+}
+/* firefox */
+.browser_image {
+  scrollbar-width: none;
 }
 </style>
