@@ -7,13 +7,7 @@
   </nav>
   <div class="detail_head">
     <div class="detail_images">
-      <div class="browser">
-        <div class="browser_toolbar"><span></span></div>
-        <div class="detail_gallery">
-          <div class="browser_content" v-for="src in theme.images" v-cover="urlize(src)" :key="src"></div>
-          <div class="browser_content" v-if="!theme.images || !theme.images.length"></div>
-        </div>
-      </div>
+      <browser :images="theme.images" />
     </div>
     <div class="detail_info">
       <table>
@@ -53,9 +47,10 @@
 <script>
 import themes from '../index.json'
 import bridge from './bridge'
-import { genImageURL } from './util'
+import Browser from './components/Browser.vue'
 
 export default {
+  components: { Browser },
   data () {
     const name = this.$route.params.slug
     const theme = themes.filter(d => d.name === name)[0]
@@ -77,9 +72,6 @@ export default {
     onUse () {
       bridge.emit('select', this.theme)
     },
-    urlize (src) {
-      return genImageURL(src, this.theme.repo)
-    }
   },
   async created () {
     const name = this.$route.params.slug
@@ -93,7 +85,7 @@ export default {
 <style src="./css/yue.css"></style>
 <style>
 .detail {
-  max-width: 860px;
+  max-width: 980px;
   margin: 0 auto;
 }
 .detail_name {
@@ -102,15 +94,6 @@ export default {
 .detail_head {
   display: flex;
   margin-top: 2em;
-}
-.detail_gallery {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow: hidden;
-}
-.detail_gallery .browser_content {
-  width: 100%;
-  flex-shrink: 0;
 }
 .detail_info {
   margin-left: 4em;

@@ -12,9 +12,8 @@
   <main class="home_main inner">
     <div class="theme-list">
       <div class="theme" v-for="theme in themes" :key="theme.name">
-        <router-link class="browser" :title="theme.name" :to="theme.name">
-          <div class="browser_toolbar"><span></span></div>
-          <div class="browser_content" v-cover="thumbnail(theme)"></div>
+        <router-link class="theme_image" :title="theme.name" :to="theme.name">
+          <browser :images="theme.images" />
           <span class="theme_star" v-if="theme.stars">★ {{ theme.stars }}</span>
         </router-link>
         <div class="theme_info">
@@ -33,9 +32,10 @@
 <script>
 import themes from '../index.json'
 import bridge from './bridge'
-import { genImageURL } from './util'
+import Browser from './components/Browser.vue'
 
 export default {
+  components: { Browser },
   data () {
     const q = this.$route.query.q || ''
     return { themes, q }
@@ -49,14 +49,6 @@ export default {
     }
   },
   methods: {
-    thumbnail (theme) {
-      if (theme.images && theme.images.length) {
-        const url = theme.images[0]
-        return genImageURL(url, theme.repo)
-      } else {
-        return ''
-      }
-    },
     hasTag (tag) {
       return this.$route.query.tag === tag
     },
@@ -137,6 +129,15 @@ export default {
   margin: 10px;
   width: 280px;
 }
+.theme_image {
+  display: block;
+  position: relative;
+  transition: all 0.2s ease;
+}
+.theme_image:hover {
+  transform: translate3d(0, -6px, 0);
+  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.1);
+}
 .theme_info {
   display: flex;
   margin-top: 1.2em;
@@ -164,16 +165,20 @@ export default {
     flex-direction: column;
   }
   .home_nav {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     width: 100%;
     margin: 0 0 1em 0;
-    background: white;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
     z-index: 9;
   }
   .home_nav > strong {
     display: none;
+  }
+  .home_nav ul {
+    margin-top: 0;
   }
   .home_nav li {
     display: inline-block;

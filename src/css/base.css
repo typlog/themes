@@ -14,6 +14,41 @@ body {
   color: var(--text-color);
 }
 
+.typlog-head {
+  background: #fff;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  font-weight: 600;
+  letter-spacing: .06em;
+  margin-bottom: 48px;
+}
+.typlog-head .inner {
+  display: flex;
+  justify-content: space-between;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 10px 15px;
+}
+.typlog-head a {
+  text-decoration: none;
+  line-height: 38px;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.6);
+}
+.typlog-head a + a {
+  margin-left: 1em;
+}
+.typlog-head .logo {
+  display: inline-block;
+  vertical-align: middle;
+  width: 125px;
+  height: 38px;
+  background: url(https://typlog.com/assets/logo-black.svg) no-repeat center;
+  background-size: contain;
+}
+.embed .typlog-head {
+  display: none;
+}
+
 .inner {
   padding: 1em;
   box-sizing: border-box;
@@ -56,57 +91,16 @@ a:hover {
   font-size: 12px;
 }
 
-.browser {
-  display: block;
-  position: relative;
-  border-radius: 6px;
-  overflow: hidden;
-  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.08);
-  transition: all 0.2s ease;
-}
-a.browser:hover {
-  transform: translate3d(0, -6px, 0);
-  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.1);
-}
-.browser_toolbar {
-  position: relative;
-  background-color: #f2f2f2;
-  border-radius: 6px 6px 0 0;
-  padding: 10px 12px;
-}
-.browser_toolbar span,
-.browser_toolbar span:before,
-.browser_toolbar span::after {
-  display: block;
-  content: '';
-  background-color: #c4c4c4;
-  border-radius: 50%;
-  height: 6px;
-  width: 6px;
-}
-.browser_toolbar span {
-  position: relative;
-}
-.browser_toolbar span:before {
-  position: absolute;
-  left: 10px;
-}
-.browser_toolbar span::after {
-  position: absolute;
-  left: 20px;
-}
-.browser_content {
-  padding-bottom: 62.5%;
-  border-radius: 0 0 3px 3px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
 .js-use {
   display: none;
 }
 
 .embed .js-use {
   display: inline-block;
+}
+
+@media (max-width: 900px) {
+  .typlog-head {
+    margin-bottom: 4px;
+  }
 }
