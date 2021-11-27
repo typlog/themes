@@ -35,7 +35,7 @@
         </tbody>
       </table>
       <div class="detail_action">
-        <a class="button" :href="'https://preview.typlog.com/' + theme.name + '/'" target="_blank">Preview</a>
+        <a class="button" :href="previewURL" target="_blank">Preview</a>
         <button class="js-use button" @click.prevent="onUse">Use</button>
       </div>
     </div>
@@ -66,6 +66,12 @@ export default {
         rv.push(['名前', this.theme['name#ja']])
       }
       return rv
+    },
+    previewURL () {
+      if (this.theme.preview) {
+        return this.theme.preview
+      }
+      return 'https://preview.typlog.com/' + theme.name + '/'
     },
   },
   methods: {
