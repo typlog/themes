@@ -71,7 +71,7 @@ export default {
       if (this.theme.preview) {
         return this.theme.preview
       }
-      return 'https://preview.typlog.com/' + this.theme.name + '/'
+      return `https://theme-${this.theme.name}.typlog.io/`
     },
   },
   methods: {
