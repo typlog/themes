@@ -61,14 +61,6 @@ export default {
       } else {
         this.themes = themes.filter(theme => {
           const tags = theme.tags || []
-          if (theme.features) {
-            if (theme.features.post) {
-              tags.push('blog')
-            }
-            if (theme.features.audio) {
-              tags.push('podcast')
-            }
-          }
           return tags.indexOf(tag) !== -1
         })
       }

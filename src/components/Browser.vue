@@ -115,9 +115,15 @@ export default {
   display: none;
   pointer-events: none;
 }
+.browser_content button {
+  display: none;
+}
 .browser_content:hover .browser_mask {
   display: block;
   background: rgba(0, 0, 0, 0.5);
+}
+.browser_content:hover button {
+  display: inline-block;
 }
 .browser_scroll {
   display: flex;
