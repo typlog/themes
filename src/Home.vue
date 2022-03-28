@@ -11,8 +11,8 @@
   </nav>
   <main class="home_main inner">
     <div class="theme-list">
-      <div class="theme" v-for="theme in themes" :key="theme.name">
-        <router-link class="theme_image" :title="theme.name" :to="theme.name">
+      <div class="theme" v-for="theme in themes" :key="theme.id">
+        <router-link class="theme_image" :title="theme.name" :to="theme.id">
           <browser :images="theme.images" />
           <span class="theme_star" v-if="theme.stars">★ {{ theme.stars }}</span>
         </router-link>

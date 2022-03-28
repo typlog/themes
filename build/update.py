@@ -39,6 +39,7 @@ def update_theme(name, repo):
     data = fetch_theme_info(repo)
     print('update:', name, repo, data['version'])
     info = fetch_repo_data(repo)
+    data['id'] = name
     data['avatar'] = info['owner']['avatar_url']
     data['stars'] = info['watchers']
     data['readme'] = fetch_readme(repo)

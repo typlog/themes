@@ -53,7 +53,7 @@ export default {
   components: { Browser },
   data () {
     const name = this.$route.params.slug
-    const theme = themes.filter(d => d.name === name)[0]
+    const theme = themes.filter(d => d.id === name)[0]
     return { theme }
   },
   computed: {
@@ -71,7 +71,7 @@ export default {
       if (this.theme.preview) {
         return this.theme.preview
       }
-      return `https://theme-${this.theme.name}.typlog.io/`
+      return `https://theme-${this.theme.id}.typlog.io/`
     },
   },
   methods: {

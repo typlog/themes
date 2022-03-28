@@ -1,7 +1,7 @@
 .PHONY: build update clean
 
 update:
-	@python3 build/update.py registry/*.json
+	@python3 build/update.py
 	@python3 build/generate.py
 
 build:
