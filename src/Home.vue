@@ -10,6 +10,7 @@
     </ul>
   </nav>
   <main class="home_main inner">
+    <p>You can design and use your own theme as well. Learn <a href="https://docs.typlog.com/en/topic/theme/" target="_blank" rel="noopener noreferrer nofollow">how to use the theme builder</a>.</p>
     <div class="theme-list">
       <div class="theme" v-for="theme in themes" :key="theme.name">
         <router-link class="theme_image" :title="theme.name" :to="theme.name">
