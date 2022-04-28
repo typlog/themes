@@ -4,9 +4,11 @@ from collections import OrderedDict
 
 
 def normalize(data):
-    if 'readme' in data:
-        del data['readme']
-    return data
+    rv = {}
+    keys = ['id', 'name', 'name#ja', 'images', 'stars', 'tags']
+    for k in keys:
+        rv[k] = data.get(k)
+    return rv
 
 
 def run():
