@@ -5,7 +5,7 @@ from collections import OrderedDict
 
 def normalize(data):
     rv = {}
-    keys = ['id', 'name', 'name#ja', 'images', 'stars', 'tags']
+    keys = ['id', 'name', 'repo', 'version', 'name#zh', 'name#ja', 'images', 'stars', 'tags']
     for k in keys:
         rv[k] = data.get(k)
     return rv
