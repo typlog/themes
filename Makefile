@@ -8,6 +8,7 @@ build:
 	@npm run build
 	@cp -r data dist
 	@cp names.json dist
+	@cp index.json dist
 
 clean:
 	@rm -fr dist

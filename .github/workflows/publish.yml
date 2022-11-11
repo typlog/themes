@@ -15,8 +15,11 @@ jobs:
         node-version: '14'
     - run: npm install
     - run: make build
-    - name: deploy
+    - name: gh pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist
+    - name: deploy
+      run: |
+          curl -XPOST -H "Authorization: ${{ secrets.DEPLOY_KEY }} ${{ secrets.DEPLOY_URL }} -F task=fetch_themes
