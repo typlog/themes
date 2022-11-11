@@ -22,4 +22,4 @@ jobs:
         publish_dir: ./dist
     - name: deploy
       run: |
-          curl -XPOST -H "Authorization: ${{ secrets.DEPLOY_KEY }} ${{ secrets.DEPLOY_URL }} -F task=fetch_themes
+          curl -XPOST -H "Authorization: ${{ secrets.DEPLOY_KEY }}" ${{ secrets.DEPLOY_URL }} -F task=fetch_themes
