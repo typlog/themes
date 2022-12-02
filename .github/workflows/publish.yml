@@ -4,22 +4,45 @@ on:
   push:
     branches:
     - release
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+    - uses: actions/configure-pages@v2
     - uses: actions/setup-node@v2
       with:
         node-version: '14'
     - run: npm install
     - run: make build
-    - name: gh pages
-      uses: peaceiris/actions-gh-pages@v3
+    - uses: actions/upload-pages-artifact@v1
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist
+        path: 'dist'
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
     - name: deploy
+      id: deployment
+      uses: actions/deploy-pages@v1
+
+    - name: webhook
       run: |
           curl -XPOST -H "Authorization: ${{ secrets.DEPLOY_KEY }}" ${{ secrets.DEPLOY_URL }} -F task=fetch_themes
