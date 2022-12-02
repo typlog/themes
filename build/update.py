@@ -47,12 +47,18 @@ def update_theme(name, repo):
         json.dump(data, f)
 
 
-def main():
+def main(name=None):
     with open('registry.json') as f:
         data = json.load(f)
-        for name in data:
+        if name:
             update_theme(name, data[name])
+        else:
+            for name in data:
+                update_theme(name, data[name])
 
 
 if __name__ == '__main__':
-    main()
+    if len(sys.argv) == 2:
+        main(sys.argv[1])
+    else:
+        main()
